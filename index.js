@@ -50,6 +50,13 @@ app.get('/json/authors/:id/', (req, res) =>{
         nationality: `${authors[authorName].nationality}`
     });
 })
+app.get('/json/authors/:id/books', (req, res) =>{
+    let authorBook = req.params.id;
+    res.json({
+        books: `${authors[authorBook].books}`,
+        
+    });
+})
 
 
 app.listen(port, () =>{
