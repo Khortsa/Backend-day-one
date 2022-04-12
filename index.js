@@ -1,6 +1,6 @@
 
 const express = require('express');
-const port = 3000;
+
 
 const app = express();
 
@@ -35,30 +35,31 @@ app.get('/', (req, res) => {
 });
 
 app.get('/authors/:id/', (req, res) => {
-    let authorName = req.params.id;
-    res.send(`${authors[authorName].name}, ${authors[authorName].nationality}`)
+    const id = req.params.id -1;
+    const author = authors[id]
+    res.send(`${author.name}, ${author.nationality}`)
 });
 app.get('/authors/:id/books', (req, res) => {
-    let authorName = req.params.id;
-    res.send(`${authors[authorName].books}`)
+    const id = req.params.id -1;
+    res.send(authors[id].books)
 });
 
 app.get('/json/authors/:id/', (req, res) =>{
-    let authorName = req.params.id;
+    const id = req.params.id -1;
     res.json({
-        name: `${authors[authorName].name}`,
-        nationality: `${authors[authorName].nationality}`
+        name: authors[id].name,
+        nationality: authors[id].nationality
     });
 })
 app.get('/json/authors/:id/books', (req, res) =>{
-    let authorBook = req.params.id;
+    const id = req.params.id -1;
     res.json({
-        books: `${authors[authorBook].books}`,
+        books: authors[id].books
         
     });
 })
 
 
-app.listen(port, () =>{
-   console.log(`server on port: ${port}`);
+app.listen(3000, () =>{
+   console.log('server on port 3000');
 });
